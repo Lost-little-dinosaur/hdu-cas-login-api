@@ -9,7 +9,7 @@ type GetIHduTokenResponse struct {
 	TpUp string `json:"tpUp"`
 }
 type GetNewJWTokenResponse struct {
-	JSESSIONID string `json:" JSESSIONID"`
+	JSESSIONID string `json:"JSESSIONID"`
 	Route      string `json:"route"`
 }
 

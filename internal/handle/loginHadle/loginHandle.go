@@ -18,7 +18,8 @@ func HandleGetIHduToken(c *gin.Context) {
 	ticker := hducashelper.CasPasswordLogin(req.Username, req.Password) // 杭电 CAS 账号密码
 	iHduLogin := hducashelper.IHduLogin(ticker)
 	if iHduLogin.Error() != nil {
-		middleware.FailWithCode(c, 40200, "登录iHDU失败")
+		middleware.FailWithCode(c, 40201, "登录iHDU失败")
+		return
 	}
 	tempStr := iHduLogin.GetCookie()
 	//log.Println(tempStr)
@@ -36,7 +37,8 @@ func HandleGetNewJWToken(c *gin.Context) {
 	ticker := hducashelper.CasPasswordLogin(req.Username, req.Password) // 杭电 CAS 账号密码
 	newJwLogin := hducashelper.NewJWLogin(ticker)
 	if newJwLogin.Error() != nil {
-		middleware.FailWithCode(c, 40201, "登录NewJW失败")
+		middleware.FailWithCode(c, 40202, "登录NewJW失败")
+		return
 	}
 	tempArr := strings.Split(newJwLogin.GetCookie(), "=")
 	//log.Println(tempArr)
@@ -62,7 +64,8 @@ func HandleGetSKLToken(c *gin.Context) {
 	ticker := hducashelper.CasPasswordLogin(req.Username, req.Password) // 杭电 CAS 账号密码
 	sklLogin := hducashelper.SklLogin(ticker)
 	if sklLogin.Error() != nil {
-		middleware.FailWithCode(c, 40202, "登录SKL失败")
+		middleware.FailWithCode(c, 40203, "登录SKL失败")
+		return
 	}
 	middleware.Success(c, login.GetSKLokenResponse{
 		Token: sklLogin.GetToken(),
